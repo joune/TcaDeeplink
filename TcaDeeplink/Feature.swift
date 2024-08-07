@@ -70,10 +70,15 @@ public struct FeatureView: View {
     }
  
     public var body: some View {
+        let _ = Self._printChanges()
         VStack {
             Text("Hello from \(self.viewStore.id)")
             Text("update: \(self.viewStore.update)")
         }
+        .id(self.viewStore.id)
+        .onChange(of: self.viewStore.id, { oldValue, newValue in
+            print("XXX id changed \(oldValue) -> \(newValue)")
+        })
         .task {
             await self.viewStore.send(.taskStart).finish()
         }

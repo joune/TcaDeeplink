@@ -30,7 +30,7 @@ public struct HomeReducer: Reducer {
                         print("sleep error \(error)")
                     }
                 }
-            case .close:
+            case .close: // not used in case 1
                 state.destination = nil
                 //return .none // this closes the feature view
                 return .send(.deeplink("after-close")) // but this doesn't
